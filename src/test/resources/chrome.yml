@@ -1,4 +1,4 @@
 capabilities:
-  version: latest
+  version: lastest
   arguments: incognito,disable-notifications
   lang: en
