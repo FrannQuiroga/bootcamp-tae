@@ -7,8 +7,12 @@ import org.openqa.selenium.support.FindBy;
 
 public class HeaderBar extends WebComponent {
 
-    @FindBy(css = "product='HOTELS")
+    @FindBy(css = "[product='HOTELS']")
     private WebElement accommodationButton;
+
+    @FindBy(id = "searchbox-sbox-box-hotels")
+    private WebElement accomodationsContainer;
+
 
     public HeaderBar(WebElement container) {
         super(container);
@@ -16,6 +20,6 @@ public class HeaderBar extends WebComponent {
 
     public HotelSearchPage goToHotels(){
         click(accommodationButton);
-        return new HotelSearchPage();
+        return new HotelSearchPage(accomodationsContainer);
     }
 }

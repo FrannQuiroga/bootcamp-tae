@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Calendar extends WebComponent {
 
-    @FindBy(css = "._dpmg2--month-title")
+    @FindBy(css = "._dpmg2--month-title-month")
     private WebElement title;
 
     @FindBy(css = "._dpmg2--month-daysName")

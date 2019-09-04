@@ -1,20 +1,17 @@
 package com.bootcamp.tae.pages.hotel;
 
-import com.bootcamp.tae.page.web.WebPage;
-import com.bootcamp.tae.pages.hotel.common.calendar.Calendar;
+import com.bootcamp.tae.page.web.WebComponent;
 import com.bootcamp.tae.pages.hotel.common.calendar.CalendarContainer;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+public class HotelSearchPage extends WebComponent {
 
-public class HotelSearchPage extends WebPage {
-
-    @FindBy(css = ".sbox-destination.sbox-primary")
+    @FindBy(css = ".sbox-destination")
     private WebElement destinationInput;
 
     @FindBy(css = ".ac-group-container .item")
-    private List<WebElement> suggestionsDropdown;
+    private /*List<WebElement>*/ WebElement suggestionsDropdown;
 
     @FindBy(css = ".sbox-checkin-date")
     private WebElement checkInInput;
@@ -34,18 +31,22 @@ public class HotelSearchPage extends WebPage {
     @FindBy(css = "._dpmg2--wrapper")
     private WebElement calContainer;
 
+    public HotelSearchPage(WebElement container) {
+        super(container);
+    }
+
     public CalendarContainer calendarContainer(){
-        return new CalendarContainer(calContainer)
+        return new CalendarContainer(calContainer);
     }
 
     public HotelSearchPage typeDestination(String destination) {
         type(destinationInput, destination);
-        click(suggestionsDropdown.get(0));
+        click(suggestionsDropdown/*.get(0)*/);
         return this;
     }
-    public HotelSearchPage selectCheckIn() {
+    public HotelSearchPage selectCheckIn(String month, String day) {
         click(checkInInput);
-        calendarContainer().selectCheckIn("September", 20);
+        calendarContainer().selectCheckIn(month, day);
         return this;
     }
 
