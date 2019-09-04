@@ -1,0 +1,31 @@
+package com.bootcamp.tae.test.Hotel;
+
+import com.bootcamp.tae.pages.HomePage;
+import com.bootcamp.tae.testsuite.BaseTestSuite;
+import org.junit.Before;
+import org.junit.Test;
+
+public class TestActivity extends BaseTestSuite {
+
+    private HomePage home;
+
+    @Before
+    public void init(){home = new HomePage();}
+
+    @Test
+    public void testSearch() throws InterruptedException {
+        home.getBarTop()
+                .goToSearchHotel()
+                .typeDestination("Miami Beach")
+                .openCalendar()
+                .selectReserve(4,9,2020,10) //No se pueden hacer reservas entre dias de distintos meses
+                .pressSearchButton();
+
+
+        Thread.sleep(5000);
+    }
+
+
+
+
+}
