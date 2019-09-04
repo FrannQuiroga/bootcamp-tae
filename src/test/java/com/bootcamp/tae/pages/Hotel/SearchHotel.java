@@ -1,7 +1,9 @@
 package com.bootcamp.tae.pages.Hotel;
 
+import com.bootcamp.tae.js.Javascript;
 import com.bootcamp.tae.page.web.WebPage;
 import com.bootcamp.tae.pages.common.Calendar.CalendarComponent;
+import com.bootcamp.tae.pages.common.Rooms;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -19,7 +21,7 @@ public class SearchHotel extends WebPage {
     @FindBy(css = ".sbox-checkin-date")
     private List<WebElement> openCalendarElement;
 
-    @FindBy(css = "div.input-tag.sbox-distribution-container-input.-rooms")
+    @FindBy(css = ".sbox-guests-container .input-container input")
     private WebElement openRoomsElement; //NO FUNCIONA
 
     @FindBy(css = "._dpmg2--date._dpmg2--available")
@@ -35,8 +37,14 @@ public class SearchHotel extends WebPage {
 
     private Calendar calendarJava = Calendar.getInstance();
 
-    @FindBy(css = ".a.sbox-search")
-    private WebElement searchButton; //NO FUNCIONA
+    @FindBy(css = ".sbox-3-btn.-primary.-md.sbox-search")
+    private List<WebElement> searchButton; //NO FUNCIONA
+
+    @FindBy(className = ".number-picker.sbox-3-steppers.-md")
+    private WebElement roomsContainer;
+
+    private Rooms roomsComponent = new Rooms(roomsContainer);
+
 
     public SearchHotel typeDestination(String destination) {
         type(destinationInput, destination);
@@ -49,13 +57,13 @@ public class SearchHotel extends WebPage {
         return this;
     }
 
-    public SearchHotel openRooms(){ //NO FUNCIONA
-        click(openRoomsElement);
+    public SearchHotel openRooms(){
+        Javascript.click(openRoomsElement);
         return this;
     }
 
-    public SearchHotel pressSearchButton(){ //NO FUNCIONA
-        click(searchButton);
+    public SearchHotel pressSearchButton(){
+        click(searchButton.get(1));
         return this;
     }
 
@@ -72,6 +80,10 @@ public class SearchHotel extends WebPage {
             calendar.selectReserve(day,month,year,duration);
         }
         return this;
+    }
+
+    public Rooms getRoomsComponent(){
+        return roomsComponent;
     }
 /*
     public SearchHotel selectReserve(int day,int month,int year,int duration){

@@ -18,8 +18,10 @@ public class TestActivity extends BaseTestSuite {
                 .goToSearchHotel()
                 .typeDestination("Miami Beach")
                 .openCalendar()
-                .selectReserve(4,9,2020,10) //No se pueden hacer reservas entre dias de distintos meses
-                .pressSearchButton();
+                .selectReserve(7,9,2019,10) //No se pueden hacer reservas entre dias de distintos meses
+                .openRooms()
+                .getRoomsComponent().addAdults();
+                //.pressSearchButton();
 
 
         Thread.sleep(5000);
