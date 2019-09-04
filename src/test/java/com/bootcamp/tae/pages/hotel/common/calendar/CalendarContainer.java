@@ -16,8 +16,8 @@ public class CalendarContainer extends WebComponent {
         super(container);
     }
 
-    public CalendarContainer selectCheckIn(int months){
-        new Calendar(calendarLeftContainer).selectMonths(months).selectFirstAvailableDay();
+    public CalendarContainer selectCheckIn(String month){
+        new Calendar(calendarLeftContainer).selectMonth(month).selectFirstAvailableDay();
         return this;
     }
 

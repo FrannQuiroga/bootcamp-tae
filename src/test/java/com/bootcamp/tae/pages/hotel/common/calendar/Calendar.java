@@ -22,5 +22,16 @@ public class Calendar extends WebComponent {
         super(container);
     }
 
+    public Calendar selectMonth(String month){
+        return null;
+    }
+
+    public Calendar selectDay(int day){
+        return null;
+    }
+
+    public Calendar selectFirstDay(){
+        return null;
+    }
 
 }
