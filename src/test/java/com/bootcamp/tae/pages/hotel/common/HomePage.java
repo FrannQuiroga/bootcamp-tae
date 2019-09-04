@@ -1,4 +1,4 @@
-package com.bootcamp.tae.pages.hotel;
+package com.bootcamp.tae.pages.hotel.common;
 
 import com.bootcamp.tae.page.web.WebPage;
 import com.bootcamp.tae.pages.hotel.common.HeaderBar;

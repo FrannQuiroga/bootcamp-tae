@@ -4,25 +4,29 @@ import com.bootcamp.tae.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+
 public class CalendarContainer extends WebComponent {
 
-    @FindBy
+    @FindBy(css = "._dpmg2--month-active")
     private WebElement calendarLeftContainer;
 
     @FindBy
     private WebElement calendarRightContainer;
 
-    protected CalendarContainer(WebElement container) {
+    @FindBy(css = "._dpmg2--controls-next")
+    private WebElement nextMonth;
+
+    public CalendarContainer(WebElement container) {
         super(container);
     }
 
-    public CalendarContainer selectCheckIn(String month){
-        new Calendar(calendarLeftContainer).selectMonth(month).selectFirstAvailableDay();
+    public CalendarContainer selectCheckIn(String month, String day){
+        Calendar calendar = new Calendar(calendarLeftContainer);
+        while(calendar.getTitle().getText().equalsIgnoreCase(month)==false){
+            click(nextMonth);
+        }
+        calendar.selectDate(month, day);
         return this;
     }
 
-    public CalendarContainer selectCheckOut(int day){
-        new Calendar(calendarRightContainer).selectDay(day);
-        return this;
-    }
 }

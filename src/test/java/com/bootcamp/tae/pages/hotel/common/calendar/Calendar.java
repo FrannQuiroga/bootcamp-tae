@@ -8,13 +8,13 @@ import java.util.List;
 
 public class Calendar extends WebComponent {
 
-    @FindBy(css = "._dpmg2--month-active ._dpmg2--month-title-month")
+    @FindBy(css = "._dpmg2--month-title")
     private WebElement title;
 
-    @FindBy(css = "._dpmg2--month-active ._dpmg2--month-daysName")
+    @FindBy(css = "._dpmg2--month-daysName")
     private WebElement daysHeader;
 
-    @FindBy(css ="_.dpmg2--month-active ._dpmg2--dates")
+    @FindBy(css ="._dpmg2--dates ._dpmg2--available")
     private List<WebElement> activeDays;
 
 
@@ -22,16 +22,30 @@ public class Calendar extends WebComponent {
         super(container);
     }
 
-    public Calendar selectMonth(String month){
-        return null;
+    public Calendar selectDate(String month, String day){
+        if(title.getText().equalsIgnoreCase(month)){
+            click(activeDays.stream()
+                    .filter(x -> x.getText().equalsIgnoreCase(day))
+                    .findFirst()
+                    .get()
+            );
+        }
+        return this;
     }
 
-    public Calendar selectDay(int day){
-        return null;
+    public Calendar selectFirstAvailableDay(){
+        click(activeDays.stream()
+                .filter(day -> day.getAttribute("class").contains("_dpmg2--available"))
+                .findFirst()
+                .get()
+        );
+        return this;
     }
 
-    public Calendar selectFirstDay(){
-        return null;
+    public WebElement getTitle(){
+        return title;
     }
+
+
 
 }
