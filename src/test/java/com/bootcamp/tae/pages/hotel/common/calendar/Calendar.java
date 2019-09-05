@@ -22,23 +22,12 @@ public class Calendar extends WebComponent {
         super(container);
     }
 
-    public Calendar selectDate(String month, String day){
-        if(title.getText().equalsIgnoreCase(month)){
+    public Calendar selectDate(String day){
             click(activeDays.stream()
                     .filter(x -> x.getText().equalsIgnoreCase(day))
                     .findFirst()
                     .get()
             );
-        }
-        return this;
-    }
-
-    public Calendar selectFirstAvailableDay(){
-        click(activeDays.stream()
-                .filter(day -> day.getAttribute("class").contains("_dpmg2--available"))
-                .findFirst()
-                .get()
-        );
         return this;
     }
 

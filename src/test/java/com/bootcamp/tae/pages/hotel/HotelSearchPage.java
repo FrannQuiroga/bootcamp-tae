@@ -1,25 +1,26 @@
 package com.bootcamp.tae.pages.hotel;
 
-import com.bootcamp.tae.page.web.WebComponent;
+import com.bootcamp.tae.page.web.WebPage;
 import com.bootcamp.tae.pages.hotel.common.calendar.CalendarContainer;
+import com.bootcamp.tae.pages.hotel.searchResults.HotelSearchResultsPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class HotelSearchPage extends WebComponent {
+public class HotelSearchPage extends WebPage {
 
-    @FindBy(css = ".sbox-destination")
+    @FindBy(css = ".sbox-destination.sbox-primary")
     private WebElement destinationInput;
 
     @FindBy(css = ".ac-group-container .item")
-    private /*List<WebElement>*/ WebElement suggestionsDropdown;
+    private /*List<WebElement>*/WebElement suggestionsDropdown;
 
-    @FindBy(css = ".sbox-checkin-date")
+    @FindBy(css = "#searchbox-sbox-box-hotels .sbox-checkin-date")
     private WebElement checkInInput;
 
-     @FindBy(css = ".sbox-checkout-date")
+     @FindBy(css = "#searchbox-sbox-box-hotels .sbox-checkout-date")
     private WebElement checkOutInput;
 
-    //TODO: @FindBy
+    @FindBy(css = "#searchbox-sbox-box-hotels .sbox-distribution .sbox-distribution-picker-wrapper")
     private WebElement roomsInput;
 
     //TODO: @FindBy
@@ -30,10 +31,6 @@ public class HotelSearchPage extends WebComponent {
 
     @FindBy(css = "._dpmg2--wrapper")
     private WebElement calContainer;
-
-    public HotelSearchPage(WebElement container) {
-        super(container);
-    }
 
     public CalendarContainer calendarContainer(){
         return new CalendarContainer(calContainer);
@@ -46,18 +43,17 @@ public class HotelSearchPage extends WebComponent {
     }
     public HotelSearchPage selectCheckIn(String month, String day) {
         click(checkInInput);
-        calendarContainer().selectCheckIn(month, day);
+        calendarContainer().selectDates(month, day);
         return this;
     }
 
-   /* public HotelSearchPage selectCheckOut() {
-        click(checkOutInput);
-        calendarContainer().selectCheckOut("September", 24);
+    public HotelSearchPage selectCheckOut(String month, String day) {
+        calendarContainer().selectDates(month, day);
         return this;
-    }*/
+    }
 
     public HotelSearchPage selectChildren() {
-        // TODO Select children and age
+        click(roomsInput);
         return this;
     }
 

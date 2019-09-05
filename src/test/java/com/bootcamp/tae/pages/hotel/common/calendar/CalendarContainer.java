@@ -8,10 +8,7 @@ import org.openqa.selenium.support.FindBy;
 public class CalendarContainer extends WebComponent {
 
     @FindBy(css = "._dpmg2--month-active")
-    private WebElement calendarLeftContainer;
-
-    @FindBy
-    private WebElement calendarRightContainer;
+    private WebElement daysContainer;
 
     @FindBy(css = "._dpmg2--controls-next")
     private WebElement nextMonth;
@@ -20,12 +17,14 @@ public class CalendarContainer extends WebComponent {
         super(container);
     }
 
-    public CalendarContainer selectCheckIn(String month, String day){
-        Calendar calendar = new Calendar(calendarLeftContainer);
+    public CalendarContainer selectDates(String month, String day){
+        Calendar calendar = new Calendar(daysContainer);
         while(calendar.getTitle().getText().equalsIgnoreCase(month)==false){
             click(nextMonth);
         }
-        calendar.selectDate(month, day);
+        if(calendar.getTitle().getText().equalsIgnoreCase(month)) {
+            calendar.selectDate(day);
+        }
         return this;
     }
 

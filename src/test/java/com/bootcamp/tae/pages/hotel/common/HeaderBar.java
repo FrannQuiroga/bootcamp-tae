@@ -10,16 +10,12 @@ public class HeaderBar extends WebComponent {
     @FindBy(css = "[product='HOTELS']")
     private WebElement accommodationButton;
 
-    @FindBy(id = "searchbox-sbox-box-hotels")
-    private WebElement accomodationsContainer;
-
-
     public HeaderBar(WebElement container) {
         super(container);
     }
 
     public HotelSearchPage goToHotels(){
         click(accommodationButton);
-        return new HotelSearchPage(accomodationsContainer);
+        return new HotelSearchPage();
     }
 }
