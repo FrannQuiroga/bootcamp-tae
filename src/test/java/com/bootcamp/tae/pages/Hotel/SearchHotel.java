@@ -21,8 +21,9 @@ public class SearchHotel extends WebPage {
     @FindBy(css = ".sbox-checkin-date")
     private List<WebElement> openCalendarElement;
 
-    @FindBy(css = ".sbox-guests-container .input-container input")
-    private WebElement openRoomsElement; //NO FUNCIONA
+    //@FindBy(css = ".sbox-guests-container .input-container input")
+    @FindBy(css = ".-mr3-l .sbox-guests-container .input-container input.sbox-rooms")
+    private WebElement openRoomsElement;
 
     @FindBy(css = "._dpmg2--date._dpmg2--available")
     private List<WebElement> availableDays;
@@ -38,13 +39,18 @@ public class SearchHotel extends WebPage {
     private Calendar calendarJava = Calendar.getInstance();
 
     @FindBy(css = ".sbox-3-btn.-primary.-md.sbox-search")
-    private List<WebElement> searchButton; //NO FUNCIONA
+    private List<WebElement> searchButton;
 
-    @FindBy(className = ".number-picker.sbox-3-steppers.-md")
+/*
+    @FindBy(className = "_pnlpk-itemBlock__itemRows")
+    private List<WebElement> roomsContainer;*/
+
+    @FindBy(css = "._pnlpk-panel--mobile")
     private WebElement roomsContainer;
 
-    private Rooms roomsComponent = new Rooms(roomsContainer);
 
+    //private Rooms roomsComponent = new Rooms(roomsContainer.get(5)); //Horrible pero es la unica forma de identificarlo
+    private Rooms roomsComponent = new Rooms(roomsContainer);
 
     public SearchHotel typeDestination(String destination) {
         type(destinationInput, destination);
@@ -62,9 +68,9 @@ public class SearchHotel extends WebPage {
         return this;
     }
 
-    public SearchHotel pressSearchButton(){
+    public SearchHotelResults pressSearchButton(){
         click(searchButton.get(1));
-        return this;
+        return new SearchHotelResults();
     }
 
     public SearchHotel selectReserve(int day,int month,int year,int duration){
@@ -85,6 +91,7 @@ public class SearchHotel extends WebPage {
     public Rooms getRoomsComponent(){
         return roomsComponent;
     }
+
 /*
     public SearchHotel selectReserve(int day,int month,int year,int duration){
         Calendar calendar = Calendar.getInstance();

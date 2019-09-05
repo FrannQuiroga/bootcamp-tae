@@ -24,6 +24,9 @@ public class CalendarComponent extends WebComponent {
         int currentYear = calendar.get(Calendar.YEAR);
 
         if(month == currentMonth && year == currentYear){
+            if(today > day  && month == currentMonth  && year == currentYear){
+                System.out.println("Dia ingresado incorrecto");
+            }
             if(today == day){
                 click(availableDays.get(0));
                 click(availableDays.get(duration));
@@ -32,9 +35,6 @@ public class CalendarComponent extends WebComponent {
                 day-=today;
                 click(availableDays.get(day));
                 click(availableDays.get(day+duration));
-            }
-            if(today > day  && month == currentMonth  && year == currentYear){
-                System.out.println("Dia ingresado incorrecto");
             }
         }else if(year==currentYear && month>currentMonth){
             click(availableDays.get(day-1));
