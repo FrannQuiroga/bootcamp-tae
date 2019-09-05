@@ -1,6 +1,7 @@
 package com.bootcamp.tae.test.Hotel;
 
 import com.bootcamp.tae.pages.HomePage;
+import com.bootcamp.tae.pages.Hotel.HotelCard;
 import com.bootcamp.tae.pages.Hotel.SearchHotelResults;
 import com.bootcamp.tae.testsuite.BaseTestSuite;
 import org.junit.Assert;
@@ -16,7 +17,10 @@ public class TestActivity extends BaseTestSuite {
 
     @Test
     public void testSearch() throws InterruptedException {
-        home.getBarTop()
+        int results = 0;
+        String toStringCard = null;
+        HotelCard result;
+        SearchHotelResults hotelResults = home.getBarTop()
                 .goToSearchHotel()
                 .typeDestination("Miami Beach")
                 .openCalendar()
@@ -25,13 +29,27 @@ public class TestActivity extends BaseTestSuite {
                 .getRoomsComponent()
                 .setAdults(2)
                 .getRoomsComponent().pressApplyButton()
-                .pressSearchButton()
-                .clickKeepInUsaButton()
-                .searchWithInputSearchByProperty("Faena Hotel Miami Beach");
-        Assert.assertTrue(new SearchHotelResults().getNumberOfResultsShown()>0);
+                .pressSearchButton();
+                Thread.sleep(5000);
+                //.clickKeepInUsaButton();
+
+        results = hotelResults.getNumberOfResultsShown();
+        Assert.assertTrue("Results are greaten than 0",results>0);
+
+                hotelResults.searchWithInputSearchByProperty("Faena Hotel Miami Beach");
+                if(hotelResults.getNumberOfResultsShown()>0){
+                    result = hotelResults.getFirstCardHotelResult();
+                    toStringCard = result.toString();
+                }
+        if(toStringCard!=null)
+        {
+            System.out.println(toStringCard);
+            Assert.assertNotNull("The cards isn't null",toStringCard);
+        }
 
 
-      //  Thread.sleep(20000);
+
+
     }
 
 

@@ -13,26 +13,34 @@ public class SearchHotelResults extends WebPage {
     @FindBy(css=".dreck-modal-keep .btn-text")
     private WebElement keepInUsaPageButton;
 
-    @FindBy(id = "hf-hotelNameTxt")
+    //@FindBy(id = "hf-hotelNameTxt")
+    @FindBy(css = ".sbox-primary")
     private WebElement searchByPropertyInput;
 
-    @FindBy(id = "hf-hotelNameApplyButton")
+    //@FindBy(id = "hf-hotelNameApplyButton")
+    @FindBy (css = ".sbox-search")
     private WebElement searchByPropertyButton;
 
-    @FindBy(css = ".hf-autocomplete-item.highlight-autocomplete")
+    //@FindBy(css = ".hf-autocomplete-item.highlight-autocomplete")
+    @FindBy (css = ".ac-group-items .item")
     private WebElement suggestions;
 
     @FindBy(css = ".hf-cluster-container")
     private List<WebElement> resultsShown;
 
+    @FindBy(css = ".hf-cluster.-featured-hotel")
+    private WebElement hotelCardContainer;
+
+    private HotelCard firstResult;
 
     public SearchHotelResults clickKeepInUsaButton(){
-        click(keepInUsaPageButton);
+            click(keepInUsaPageButton);
         return this;
     }
 
     public SearchHotelResults searchWithInputSearchByProperty(String text) throws InterruptedException {
         if(getNumberOfResultsShown()>0){
+            searchByPropertyInput.clear();
             type(searchByPropertyInput,text);
             click(suggestions);
             click(searchByPropertyButton);
@@ -42,6 +50,14 @@ public class SearchHotelResults extends WebPage {
 
     public int getNumberOfResultsShown(){
         return resultsShown.size();
+    }
+
+    public HotelCard getFirstCardHotelResult(){
+        if(hotelCardContainer.isDisplayed()){
+            firstResult = new HotelCard(hotelCardContainer);
+            return firstResult;
+        }
+        return null;
     }
 
 
