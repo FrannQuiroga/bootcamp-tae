@@ -25,7 +25,9 @@
 
 package com.bootcamp.tae.page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -79,6 +81,10 @@ public abstract class WaitOperations {
      */
     protected boolean isTextPresent(WebElement webElement, String text) {
         return waiting().until(or(textToBePresentInElement(webElement, text), textToBePresentInElementValue(webElement, text)));
+    }
+
+    protected WebElement isPresent(By by){
+        return waiting().until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     private WebDriverWait waiting() {
