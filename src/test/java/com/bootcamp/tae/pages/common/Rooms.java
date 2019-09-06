@@ -6,6 +6,8 @@ import com.bootcamp.tae.pages.Hotel.SearchHotel;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rooms extends WebComponent {
@@ -31,6 +33,11 @@ public class Rooms extends WebComponent {
 
     @FindBy (css = "._pnlpk-apply-button")
     private WebElement applyButton;
+
+    @FindBy (css = "._pnlpk-select-minor-age")
+    private List<WebElement> minorAgesContainer;
+
+    private List<SelectMinorAge> minorAgesEdit = new ArrayList<SelectMinorAge>();
 
     private int adults;
     private int children;
@@ -102,7 +109,17 @@ public class Rooms extends WebComponent {
 
     public SearchHotel pressApplyButton(){
         click(applyButton);
-        return new SearchHotel();
+        return new SearchHotel(); //Está mal que retorne instancia de la página que la contiene, pero fue hecho así a fin de terminar el ejercicio (Mejorar)
+    }
+
+    public SearchHotel setMinorAge (ArrayList<Integer> ages){
+        int i = 0;
+        for(Integer age : ages){
+            minorAgesEdit.add(new SelectMinorAge(minorAgesContainer.get(i)));
+            minorAgesEdit.get(i).selectAge(age);
+            i++;
+        }
+        return new SearchHotel();  //Está mal que retorne instancia de la página que la contiene, pero fue hecho así a fin de terminar el ejercicio (Mejorar)
     }
 
 }

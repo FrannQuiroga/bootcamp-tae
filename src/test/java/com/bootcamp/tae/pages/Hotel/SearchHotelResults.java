@@ -33,8 +33,11 @@ public class SearchHotelResults extends WebPage {
 
     private HotelCard firstResult;
 
-    public SearchHotelResults clickKeepInUsaButton(){
+    public SearchHotelResults clickKeepInUsaButton() throws InterruptedException {
+        Thread.sleep(5000);
+        if(keepInUsaPageButton.isDisplayed()){ //Si aparece, cerrarlo
             click(keepInUsaPageButton);
+        }
         return this;
     }
 

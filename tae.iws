@@ -92,7 +92,9 @@
       <updated>1567479249206</updated>
       <workItem from="1567479250910" duration="4213000" />
       <workItem from="1567555901402" duration="7860000" />
-      <workItem from="1567603688122" duration="14306000" />
+      <workItem from="1567603688122" duration="14907000" />
+      <workItem from="1567690578580" duration="16340000" />
+      <workItem from="1567733098088" duration="5402000" />
     </task>
     <servers />
   </component>
@@ -111,5 +113,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/bootcamp/tae/pages/common/Rooms.java</url>
+          <line>121</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -8,6 +8,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestActivity extends BaseTestSuite {
 
     private HomePage home;
@@ -20,6 +23,10 @@ public class TestActivity extends BaseTestSuite {
         int results = 0;
         String toStringCard = null;
         HotelCard result;
+        ArrayList<Integer> minorAges = new ArrayList<Integer>();
+        minorAges.add(5);
+        minorAges.add(3);
+
         SearchHotelResults hotelResults = home.getBarTop()
                 .goToSearchHotel()
                 .typeDestination("Miami Beach")
@@ -28,31 +35,29 @@ public class TestActivity extends BaseTestSuite {
                 .openRooms()
                 .getRoomsComponent()
                 .setAdults(2)
-                .getRoomsComponent().pressApplyButton()
-                .pressSearchButton();
-                Thread.sleep(5000);
-                //.clickKeepInUsaButton();
+                .getRoomsComponent()
+                .setChildrens(2)
+                .getRoomsComponent()
+                .setMinorAge(minorAges)
+                .getRoomsComponent()
+                .pressApplyButton()
+                .pressSearchButton()
+                .clickKeepInUsaButton();
 
         results = hotelResults.getNumberOfResultsShown();
         Assert.assertTrue("Results are greaten than 0",results>0);
 
-                hotelResults.searchWithInputSearchByProperty("Faena Hotel Miami Beach");
-                if(hotelResults.getNumberOfResultsShown()>0){
-                    result = hotelResults.getFirstCardHotelResult();
-                    toStringCard = result.toString();
-                }
-        if(toStringCard!=null)
-        {
+        hotelResults.searchWithInputSearchByProperty("Faena Hotel Miami Beach");
+        if(hotelResults.getNumberOfResultsShown()>0){
+            result = hotelResults.getFirstCardHotelResult();
+            toStringCard = result.toString();
+        }
+        if(toStringCard!=null){
             System.out.println(toStringCard);
             Assert.assertNotNull("The cards isn't null",toStringCard);
         }
 
-
-
-
+        System.out.println("End of test -- with NO ERRORS");
     }
-
-
-
 
 }
