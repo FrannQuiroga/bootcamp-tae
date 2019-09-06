@@ -1,4 +1,4 @@
-baseURL: https://us.despegar.com/
+baseURL:  https://www.amazon.com/
 remoteServerURL: http://localhost:4444/wd/hub
 appiumURL: http://localhost:4723/wd/hub
 implicitWait: 0
