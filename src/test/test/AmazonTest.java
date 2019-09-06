@@ -20,7 +20,7 @@ public class AmazonTest extends BaseTestSuite {
     public void testSearch(){
         AmazonHome results = home.typeInSearch("embracing the power of ai: a gentle co-guide");
         AmazonResults aRes = home.clickSearch();
-        Assert.assertFalse(aRes.verifyTitle("embracing the power of ai: a gentle co-guide"));
+        Assert.assertFalse(aRes.verifyTitle("embracing the power of ai: a gentle co-guide")); // el titulo del ejercicio no concuerda con el buscado, si el Assert fuese assertTrue, se rompe aca.
         Assert.assertTrue(aRes.verifyPrice());
         Assert.assertTrue(aRes.verifyImage());
         aRes.clickChosenCard();
