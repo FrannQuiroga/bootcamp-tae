@@ -1,45 +1,59 @@
 package com.bootcamp.tae.pages.component;
 
-import com.bootcamp.tae.js.Javascript;
 import com.bootcamp.tae.page.web.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class PassengersRoom extends WebComponent {
 
-    @FindBy(css="._pnlpk-stepper-adults  a.steppers-icon-right")
-    private WebElement adult;
+    @FindBy(css="._pnlpk-dynamicContent > div:nth-child(1) > div._pnlpk-itemBlock__itemRows > div:nth-child(1) > div .steppers-icon-right.sbox-3-icon-plus")
+    private WebElement adultPlus;
 
-    private WebElement minor;
+    @FindBy(css="._pnlpk-itemBlock__itemRows > div:nth-child(1) > div.-medium-down-to-lg > div > a.steppers-icon-left.sbox-3-icon-minus")
+    private WebElement adultMinus;
 
-    @FindBy(className = "_pnlpk-apply-button sbox-3-btn-ghost _pnlpk-panel__button--link-right -md")
+    @FindBy(css = "._pnlpk-apply-button")
     private WebElement buttonApply;
+
+    @FindBy(css = "._pnlpk-dynamicContent > div:nth-child(1) > div._pnlpk-itemBlock__itemRows > div:nth-child(2) > div .steppers-icon-right.sbox-3-icon-plus")
+    private WebElement minorPlus;
+
+    @FindBy(className = "_pnlpk-minors-age-select-wrapper")
+    private WebElement minorsList;
+
+    private MinorSettings minorSettings;
 
     public PassengersRoom(WebElement container) {
         super(container);
+         minorSettings = new MinorSettings(minorsList);
     }
 
-    @FindBy (css = ".steppers-icon-right.sbox-3-icon-plus")
-    private WebElement addAdultsButton;
-
-
-    public PassengersRoom selectAdultsPlus(){
+    private PassengersRoom selectClick(WebElement element){
+        click(element);
         return this;
     }
 
-    public PassengersRoom selectAdultsMinus(){
-        click(adult);
+    public PassengersRoom amountAdults(int amount){
+        int count=2;
+        if(amount<count){
+            selectClick(adultMinus);
+        }else{
+            while(amount>count){
+                selectClick(adultPlus);
+                count++;
+            }
+        }
         return this;
     }
 
-    public PassengersRoom selectChildren(int number){
-
+    public PassengersRoom addMinor(int age) {
+        selectClick(minorPlus);
+        minorSettings.addMinor(age);
         return this;
     }
 
     public PassengersRoom apply(){
-        click(buttonApply);
+        selectClick(buttonApply);
         return this;
     }
-
 }

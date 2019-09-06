@@ -1,19 +1,10 @@
 package com.bootcamp.tae.pages.Hotel;
 
-import com.bootcamp.tae.js.Javascript;
-import com.bootcamp.tae.page.web.WebComponent;
 import com.bootcamp.tae.page.web.WebPage;
 import com.bootcamp.tae.pages.Cards.HotelCards;
-import org.junit.Before;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.List;
-
 import static java.lang.Long.*;
 
 public class HotelSearchResults extends WebPage {
@@ -45,25 +36,21 @@ public class HotelSearchResults extends WebPage {
 
     public HotelSearchResults searchResults(String mySearch){
         type(search,mySearch);
+        areVisible(suggestionsDropdown);
         click(suggestionsDropdown.get(0));
         click(buttonApply);
         return this;
     }
 
     public int getTotalResults() {
+        isVisible(totalResultsLabel);
         int total = Integer.parseInt(totalResultsLabel.getText());
-        System.out.println("Total result:" + total);
         return total;
     }
 
-    public HotelSearchResults cardStatus() throws InterruptedException {
+    public HotelCards cardStatus() throws InterruptedException {
         Thread.sleep(parseLong("2000"));//I do not know how to apply expected conditions.
-        hotelCards = new HotelCards(cardsContainer.get(0));
-        /*for(WebElement e : cardsContainer){
-            System.out.println(e.getText());
-            System.out.println("\n\n\n\n\n\n--------------");
-        }*/
-        hotelCards.getList();
-        return this;
+        //TODO Catch the spinner !
+        return new HotelCards(cardsContainer.get(0));
     }
 }

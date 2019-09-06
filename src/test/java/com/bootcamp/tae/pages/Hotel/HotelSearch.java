@@ -1,13 +1,10 @@
 package com.bootcamp.tae.pages.Hotel;
 
-
-import com.bootcamp.tae.js.Javascript;
 import com.bootcamp.tae.page.web.WebPage;
 import com.bootcamp.tae.pages.common.CalendarContainer;
 import com.bootcamp.tae.pages.component.PassengersRoom;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
 
 public class HotelSearch extends WebPage {
@@ -20,10 +17,12 @@ public class HotelSearch extends WebPage {
 
     @FindBy(className = "sbox-checkin-date")
     private List<WebElement>  ClickInInput;
+
     @FindBy (css="._dpmg2--wrapper")
     private  WebElement calendarBox;
 
-    @FindBy (css = "._pnlpk-main._pnlpk-panel")
+    @FindBy(css = ".distpicker.distpicker-hotels")
+    //@FindBy  (css = "._pnlpk-panel--show")
     private WebElement roomsContainer;
 
     @FindBy (css=".sbox-distribution.-mr3-l.-mb3-s .input-container")
@@ -47,10 +46,14 @@ public class HotelSearch extends WebPage {
         return this;
     }
 
-    public HotelSearch selectChildren() {
+    public HotelSearch selectChildren()  {
         click(buttonRooms);
+        isVisible(roomsContainer);
         PassengersRoom passengersRoom = new PassengersRoom(roomsContainer);
-        passengersRoom.selectAdultsPlus();
+        passengersRoom.amountAdults(2)
+                .addMinor(7)
+                .addMinor(13)
+                .apply();
         return this;
     }
 
